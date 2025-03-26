@@ -4,9 +4,9 @@ let email = document.querySelector("input[type=email]");
 // check browser
 
 if ("Notification" in window) {
-    alert("browser support notification")
+  alert("browser support notification");
 } else {
-    alert("browser not support notification")
+  alert("browser not support notification");
 }
 
 // get access
@@ -46,6 +46,7 @@ button.addEventListener("click", (e) => {
 function notificaitonMessage() {
   return new Notification("welcome", {
     body: `yourname is : ${username.value} & your email is : ${email.value}`,
+    vibrate: [200, 100, 200],
   });
 }
 

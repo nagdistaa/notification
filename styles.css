@@ -70,3 +70,9 @@ button:active {
     background-color: gainsboro;
 }
 
+
+@media (max-width:600px){
+    form{
+        width: 90%;
+    }
+}

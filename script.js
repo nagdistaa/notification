@@ -1,7 +1,13 @@
 let button = document.querySelector("button");
 let username = document.querySelector("input[type=text]");
 let email = document.querySelector("input[type=email]");
-// local storge
+// check browser
+
+if ("Notification" in window) {
+    alert("browser support notification")
+} else {
+    alert("browser not support notification")
+}
 
 // get access
 function getNotificationpermision() {

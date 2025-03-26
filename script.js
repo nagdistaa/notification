@@ -1,29 +1,30 @@
 let button = document.querySelector("button");
 let username = document.querySelector("input[type=text]");
 let email = document.querySelector("input[type=email]");
-// check browser
 
+// check browser
 if ("Notification" in window) {
-  alert("browser support notification");
+  alert("Your browser supports notifications");
 } else {
-  alert("browser not support notification");
+  alert("Your browser does not support notifications");
 }
 
-// get access
-function getNotificationpermision() {
+// get access to notifications
+function getNotificationPermission() {
   Notification.requestPermission().then((p) => {
     if (p === "granted") {
-      // alert("thank you")
+      // The user granted permission for notifications
+      console.log("Thank you for enabling notifications.");
     } else {
-      // alert("please grant notificaiton")
+      // The user denied permission for notifications
+      console.log("Please enable notifications.");
     }
   });
 }
-getNotificationpermision();
+getNotificationPermission();
 
-// Test access
-
-function checkNotificationPermision() {
+// Test access for notifications
+function checkNotificationPermission() {
   if (Notification.permission === "granted") {
     return true;
   } else {
@@ -31,34 +32,40 @@ function checkNotificationPermision() {
   }
 }
 
+// Event listener for button click
 button.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (checkNotificationPermision()) {
+  if (checkNotificationPermission()) {
     if (checkInputs()) {
-      return notificaitonMessage();
+      return showNotification();
     } else {
-      alert("fill inputs");
+      alert("Please fill in the required fields.");
     }
   }
 });
 
-function notificaitonMessage() {
-  return new Notification("welcome", {
-    body: `yourname is : ${username.value} & your email is : ${email.value}`,
+// Show notification
+function showNotification() {
+  return new Notification("Welcome", {
+    body: `Your name is: ${username.value} & your email is: ${email.value}`,
     vibrate: [200, 100, 200],
   });
 }
 
+// Check if inputs are valid
 function checkInputs() {
-  if (!username.value.trim() == "" && !email.value.trim() == "") {
+  // Use !== for comparison to avoid mistakes
+  if (username.value.trim() !== "" && email.value.trim() !== "") {
     return true;
   } else {
     return false;
   }
 }
 
-// inputs ;
+// Event listeners for input change (optional, but good for real-time validation)
 username.addEventListener("change", checkInputs);
-checkInputs();
 email.addEventListener("change", checkInputs);
+
+// Initial check on page load
+checkInputs();
